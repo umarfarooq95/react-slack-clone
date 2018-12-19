@@ -1,0 +1,7 @@
+html,
+body,
+.App{
+  background : #eee;
+  padding : 1em;
+  height : 100vh;
+}
