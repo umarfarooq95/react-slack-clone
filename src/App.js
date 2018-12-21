@@ -1,19 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Grid } from 'semantic-ui-react';
+import ColorPanel from './components/ColorPanel/ColorPanel';
+import SidePanel from './components/SidePanel/SidePanel';
+import Messages from './components/Messages/Messages';
+import MetaPanel from './components/MetaPanel/MetaPanel';
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+    <Grid columns='equal' className='app'
+    style={{background : '#eee',height: '100%',marginTop: 0,marginLeft: 0}}>
+      <ColorPanel/>
+      <SidePanel/>
+      <Grid.Column style={{marginLeft : 320}}>
+        <Messages/>
+      </Grid.Column>
+      <Grid.Column width={4}>
+        <MetaPanel/>
+      </Grid.Column>
+    </Grid>
     );
   }
 }
