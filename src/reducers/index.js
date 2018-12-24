@@ -1,17 +1,25 @@
-import {combineReducers} from 'redux'
+import {
+    combineReducers
+} from 'redux'
 import * as actionTypes from '../actions/types'
 
 const initialState = {
-    currentUser : null,
-    isLoading : true
+    currentUser: null,
+    isLoading: true
 }
 
-const user_reducer =(state=initialState,action)=>{
+const user_reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_USER:
             return {
-                currentUser : action.payload.currentUser,
-                isLoading : false
+                currentUser: action.payload.currentUser,
+                isLoading: false
+            }
+
+        case actionTypes.CLEAR_USER:
+            return {
+              ...initialState,
+                isLoading: false
             }
 
         default:
@@ -20,7 +28,7 @@ const user_reducer =(state=initialState,action)=>{
 }
 
 const rootReducer = combineReducers({
-    user : user_reducer
+    user: user_reducer
 })
 
 export default rootReducer;
