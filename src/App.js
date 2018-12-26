@@ -5,6 +5,7 @@ import ColorPanel from './components/ColorPanel/ColorPanel';
 import SidePanel from './components/SidePanel/SidePanel';
 import Messages from './components/Messages/Messages';
 import MetaPanel from './components/MetaPanel/MetaPanel';
+import './App.css';
 
 class App extends React.Component {
   render() {
@@ -12,9 +13,16 @@ class App extends React.Component {
     <Grid columns='equal' className='app'
     style={{background : '#eee',height: '100%',marginTop: 0,marginLeft: 0}}>
       <ColorPanel/>
-      <SidePanel currentUser={this.props.currentUser}/>
+      <SidePanel
+      key={this.props.currentUser && this.props.currentUser.id}
+      currentUser={this.props.currentUser}
+      />
       <Grid.Column style={{marginLeft : 320}}>
-        <Messages/>
+        <Messages
+        key={this.props.currentChannel && this.props.currentChannel.id}
+        currentChannel={this.props.currentChannel}
+        currentUser={this.props.currentUser}
+        />
       </Grid.Column>
       <Grid.Column width={4}>
         <MetaPanel/>
@@ -25,7 +33,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  currentUser : state.user.currentUser
+  currentUser : state.user.currentUser,
+  currentChannel : state.channel.currentChannel
 })
 
 export default connect(mapStateToProps)(App)

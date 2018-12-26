@@ -73,25 +73,34 @@ class Register extends React.Component {
             firebase
             .auth()
             .createUserWithEmailAndPassword(email,password)
-            .then(function(createdUser){
-                createdUser.user.updateProfile({
-                    displayName : username,
-                    photoURL : `http://gravator.com/avatar/${md5(createdUser.user.email)}?d=identicon`
+            .then((createdUser) => {
+                    createdUser.user.updateProfile({
+                            displayName: username,
+                            photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
+                        })
+                        .then(() => {
+                            this.saveCreatedUser(createdUser)
+                            .then(()=>{
+                                console.log("user saved")
+                                this.setState({
+                                    loading: false
+                                })
+                            })
+                        })
+                        .catch((err) => {
+                            this.setState({
+                                errors: this.state.errors.concat(err),
+                                loading: false
+                            })
+                        })
                 })
-                .then(function(){
-                    this.saveCreatedUser(createdUser).then(function(){
-                        console.log("user saved")
-                        this.setState({loading:false})
+                .err((err) => {
+                    console.log(err)
+                    this.setState({
+                        errors: this.state.errors.concat(err),
+                        loading: false
                     })
                 })
-                .catch(function(err){
-                    this.setState({errors:this.state.errors.concat(err),loading:false})
-                })
-            })
-            .err(function(err){
-                console.log(err)
-                this.setState({errors:this.state.errors.concat(err),loading:false})
-            })
         }
     }
 

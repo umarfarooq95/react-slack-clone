@@ -1,8 +1,6 @@
 import React from 'react';
 import { Grid, Header, Icon, Dropdown,Image } from 'semantic-ui-react';
-
 import firebase from '../../firebase';
-
 
 class UserPanel extends React.Component{
 
